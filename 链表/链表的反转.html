@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script>
+      const l1 = {
+        val: 1,
+        next: {
+          val: 2,
+          next: {
+            val: 3,
+            next: { val: 4, next: { val: 5, next: { val: 6, next: null } } },
+          },
+        },
+      };
+
+      // 1  4  3
+
+      // 链表反转
+      function reserveListNode(head) {
+        let cur = head;
+        let pre = null;
+        while (cur) {
+          const next = cur.next;
+          cur.next = pre;
+          pre = cur;
+          cur = next;
+        }
+        return pre;
+      }
+
+      function reserveListNode2(head) {
+        let cur = head;
+        let pre = null;
+        while (cur) {
+          const next = cur.next;
+          cur.next = pre;
+          pre = cur;
+          cur = next;
+        }
+      }
+
+      //console.log(reserveListNode(l1));
+      //  1 2 3 4 5 6
+      // 1  4 3 2  5
+      // 反转指定位置链表
+
+      function reserveListNodeBetween(head, left, right) {
+        const dummyNode = {};
+        dummyNode.next = head;
+        let pre = dummyNode;
+        // 第 1 步：从虚拟头节点走 left - 1 步，来到 left 节点的前一个节点
+        // 建议写在 for 循环里，语义清晰
+        for (let i = 0; i < left - 1; i++) {
+          pre = pre.next;
+        }
+        let rightNode = pre;
+        for (let i = 0; i < right - left + 1; i++) {
+          rightNode = rightNode.next;
+        }
+
+        let betweenNode = pre.next;
+        let curr = rightNode.next;
+
+        // 注意：切断链接
+        pre.next = null;
+        rightNode.next = null;
+
+        reserveListNode2(betweenNode);
+
+        pre.next = rightNode;
+
+        betweenNode.next = curr;
+        return dummyNode.next;
+      }
+
+      //反转指定位置链表
+      var reserveListNodeBetween2 = function (head, left, right) {
+        const nodeHead = {};
+        nodeHead.next = head;
+        let pre = nodeHead;
+        for (let i = 0; i < left - 1; ++i) {
+          pre = pre.next;
+        }
+        let cur = pre.next;
+
+        for (let i = 0; i < right - left; ++i) {
+          let next = cur.next;
+          cur.next = next.next;
+          next.next = pre.next;
+          pre.next = next;
+        }
+        return nodeHead.next;
+      };
+
+      console.log(reserveListNodeBetween2(l1, 3, 5));
+    </script>
+  </body>
+</html>

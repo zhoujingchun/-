@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script>
+      const arr = [1, 9, 6, 5, 7, 4, 8];
+
+      const quickSort = (arr) => {
+        if (arr.length === 0) return [];
+
+        const left = [];
+        const right = [];
+        const pre = arr[0];
+        for (let i = 1; i < arr.length; i++) {
+          arr[i] < pre ? left.push(arr[i]) : right.push(arr[i]);
+        }
+        return quickSort(left).concat(pre, quickSort(right));
+      };
+      console.log(quickSort(arr));
+    </script>
+  </body>
+</html>

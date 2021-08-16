@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script>
+      const arr = [1, 2, 3, 4, 5];
+      function reverseArray(arr) {
+        let left = 0;
+        let right = arr.length - 1;
+
+        while (left < right) {
+          const tem = arr[right];
+          arr[right--] = arr[left];
+          arr[left++] = tem;
+        }
+        return arr;
+      }
+      console.log(reverseArray(arr));
+    </script>
+  </body>
+</html>

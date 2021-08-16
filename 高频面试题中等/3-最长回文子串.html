@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+  *
+  *
+  *
+  * 给你一个字符串 s，找到 s 中最长的回文子串。
+
+ 
+
+示例 1：
+
+输入：s = "babad"
+输出："bab"
+解释："aba" 同样是符合题意的答案。
+示例 2：
+
+输入：s = "cbbd"
+输出："bb"
+示例 3：
+
+输入：s = "a"
+输出："a"
+示例 4：
+
+输入：s = "ac"
+输出："a"
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/longest-palindromic-substring
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。*/
+    /**
+     * @param {string} s
+     * @return {string}
+     */
+
+    //  babad
+    var longestPalindrome = function (s) {
+        // 字符串为空的情况
+        if (s === null || s.length === 0) return "";
+        // 用于存储最大长度的索引 index
+        let res = new Array(2);
+        // 初始化数组
+        for (let i = 0; i < res.length; i++) {
+            res[i] = "";
+        }
+        // 遍历字符串中每一个字符
+        for (let i = 0; i < s.length; i++) {
+            let low = i;
+            let high = i;
+            // 寻找连续一样的字符作为中心扩展的中心
+            while (high < s.length - 1 && s[high + 1] === s[low]) {
+                high++;
+            }
+            // 为了让下一次循环开始位置是在相同字符串后面，若没有相同字符则下一次循环仍然是i开始，否则是相同字符后面
+            i = high;
+            // 中心扩展
+            while (low > 0 && high < s.length - 1 && s[low - 1] === s[high + 1]) {
+                low--;
+                high++;
+            }
+            // 如果比之前记录的长度大则写入
+            if (high - low > res[1] - res[0]) {
+                res[0] = low;
+                res[1] = high;
+            }
+        }
+        // 返回回文子字符串
+        return s.slice(res[0], res[1] + 1);
+    };
+
+    /*、
+  https://leetcode-cn.com/problems/longest-palindromic-substring/solution/js-zhong-xin-kuo-zhan-fa-by-edisonlangla-i9y5/*/
+</script>
+</body>
+</html>

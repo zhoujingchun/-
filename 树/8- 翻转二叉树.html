@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script>
+      /*
+* 
+*           -20
+           / \
+          3   2
+         / \   \
+        8   6   9
+        *
+        *
+        * */
+      const tree = {
+        val: -20,
+        left: {
+          val: 3,
+          left: { val: 8, left: null, right: null },
+          right: { val: 6, left: null, right: null },
+        },
+        right: {
+          val: 2,
+          left: null,
+          right: { val: 9, left: null, right: null },
+        },
+      };
+
+      const reserveTree = (root) => {
+        if (!root) return;
+
+        const left = reserveTree(root.left);
+        const right = reserveTree(root.right);
+        root.left = right;
+        root.right = left;
+        return root;
+      };
+
+      console.log(reserveTree(tree));
+    </script>
+  </body>
+</html>

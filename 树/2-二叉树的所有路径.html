@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+   * function TreeNode(val, left, right) {
+   *     this.val = (val===undefined ? 0 : val)
+   *     this.left = (left===undefined ? null : left)
+   *     this.right = (right===undefined ? null : right)
+   * }
+   *
+   *
+      -10
+     / \
+    3   2
+   / \   \
+  5   6   9
+   */
+    const tree = {
+        val: -10,
+        left: {
+            val: 3,
+            left: {val: 5, left: null, right: null},
+            right: {val: 6, left: null, right: null},
+        },
+        right: {
+            val: 2,
+            left: null,
+            right: {val: 9, left: null, right: null},
+        },
+    };
+    const allPath = [];
+    var binaryTreePaths = function (root, path) {
+        if (!root) return;
+        path += String(root.val);
+
+        if (!root.left && !root.right) {
+            allPath.push(path);
+            return;
+        }
+        binaryTreePaths(root.left, path + "->");
+        binaryTreePaths(root.right, path + "->");
+    };
+    binaryTreePaths(tree, "");
+    console.log(allPath);
+</script>
+</body>
+</html>

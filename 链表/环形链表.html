@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script>
+      //
+      function hasCycle(head) {
+        const list = new Set();
+        while (head !== null) {
+          if (list.has(head)) {
+            return head;
+          }
+          list.add(head);
+          head = head.next;
+        }
+        return null;
+      }
+    </script>
+  </body>
+</html>

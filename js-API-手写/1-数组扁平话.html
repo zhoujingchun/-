@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, [2, [3, [4, 5]]], 6]; // -> [1, 2, 3, 4, 5, 6]
+      const flat = (arr) => {
+        return arr.reduce(
+          (pre, cur) => pre.concat(Array.isArray(cur) ? flat(cur) : cur),
+          []
+        );
+      };
+      console.log(flat(arr))
+    </script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * @param {number[]} arr
+       * @param {number} k
+       * @return {number[]}
+       */
+      var smallestK = function (arr, k) {
+        let heap = [0];
+        this.count = 0;
+        for (let i = 0; i < k; i++) {
+          insert(heap, arr[i], k);
+        }
+        for (let i = k; i < arr.length; i++) {
+          if (arr[i] < heap[1]) {
+            heap[1] = arr[i];
+            heapify(heap);
+          }
+        }
+        let res = [];
+        for (let i = 1; i <= k; i++) {
+          res.push(heap[i]);
+        }
+        return res;
+      };
+
+      function insert(heap, val, k) {
+        if (this.count >= k) {
+          return;
+        }
+        this.count++;
+        heap.push(val);
+        let i = count;
+        while (parseInt(i / 2) > 0 && heap[i] > heap[parseInt(i / 2)]) {
+          swap(heap, i, parseInt(i / 2));
+          i = parseInt(i / 2);
+        }
+      }
+
+      function heapify(heap) {
+        let i = 1;
+        while (true) {
+          let maxPos = i;
+          if (i * 2 <= this.count && heap[i] < heap[i * 2]) {
+            maxPos = i * 2;
+          }
+          if (i * 2 + 1 <= this.count && heap[maxPos] < heap[i * 2 + 1]) {
+            maxPos = i * 2 + 1;
+          }
+          if (maxPos === i) {
+            break;
+          }
+          swap(heap, i, maxPos);
+          i = maxPos;
+        }
+      }
+
+      function swap(heap, i, j) {
+        let temp = heap[i];
+        heap[i] = heap[j];
+        heap[j] = temp;
+      }
+
+      /* 作者：gu-du-de-xiao-ma-xia
+    链接：https://leetcode-cn.com/problems/smallest-k-lcci/solution/jsshi-xian-da-ding-dui-by-gu-du-de-xiao-pvtvl/
+        来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。*/
+
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script>
+      Array.prototype.MyReduce = function (func, initialValue) {
+        const arr = this;
+        let base = typeof initialValue === "undefined" ? arr[0] : initialValue;
+        let startPoint = typeof initialValue === "undefined" ? 1 : 0;
+        arr.slice(startPoint).forEach(function (val, index) {
+          base = func(base, val, index + startPoint, arr);
+        });
+        return base;
+      };
+      const arr = [1, 2, 4, 5].MyReduce((pre, cur) => {
+        console.log(pre);
+        return cur * cur;
+      }, []);
+
+      console.log(arr);
+    </script>
+  </body>
+</html>

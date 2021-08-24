@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8"/>
     <title>Title</title>
-  </head>
-  <body>
-    <script>
-      /*
- 给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。
+</head>
+<body>
+<script>
+    /*
+给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。
 子序列是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。
 示例 1：
 输入：nums = [10,9,2,5,3,7,101,18]
@@ -33,24 +33,34 @@
 
 */
 
-      //  [10, 9, 2, 5, 3, 7, 101, 1x28]
-      //  [0,1,0,3,2,3]
-      var lengthOfLIS = function (nums) {
-        let pre = 1;
-        let maxAns = 1;
+    //  [9, 10, 2, 5, 3, 7, 101, 18]
+    //  [0,1,0,3,2,3]
+    var lengthOfLIS = function (nums) {
+        let res = 0
         for (let i = 0; i < nums.length; i++) {
-          if (nums[0] < nums[i + 1]) {
-            pre++;
-          } else {
-            maxAns = Math.max(pre, maxAns);
-            pre = 1;
-            continue;
-          }
+            res = Math.max(process(nums, i), res)
         }
-        console.log(maxAns,pre)
-      };
-      const nums = [10, 9, 2, 5, 3, 7, 101, 18];
-      console.log(lengthOfLIS(nums));
-    </script>
-  </body>
+        return res
+
+    };
+
+    function process(nums, index) {
+
+        if (index === nums.length) return index
+        let max = 0
+        for (let i = index + 1; i < nums.length; i++) {
+            let tem = 0
+            if (nums[i] > nums[index]) {
+                tem = process(nums, i)
+                max = Math.max(tem, max)
+            }
+        }
+        return max + 1
+
+    }
+
+    const nums = [0, 4, 1, 2, ];
+    console.log(lengthOfLIS(nums));
+</script>
+</body>
 </html>

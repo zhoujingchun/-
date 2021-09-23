@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <style>
+    .container {
+      width: 600px; /* width:400px; */
+      height: 300px;
+      display: flex;
+    }
+    .left {
+      flex: 1 2 300px;
+    }
+    .right {
+      flex: 2 1 200px;
+    }
+  </style>
+  <body>
+  <div class="">
+
+  </div>
+    <script>
+      /*
+   
+   flex: 1 2 300px;
+
+flex-grow: 1;
+flex-shrink: 2;
+flex-basis: 300px;
+.left + .right的宽度已经超过.container的宽度了，所以会发生缩放，flex-grow不起作用，flex-shrink和width(flex-basis)决定具体的大小
+
+具体的计算公式：
+
+itemSkrinkScaledWidth = flex-shrink * width
+
+shrinkRatio = itemSkrinkScaledWidth / totalShrinkScaledWidth
+
+realWidth = width - shrinkRatio * negativeWidth
+
+// itemSkrinkScaledWidth 项目收缩比例宽度，flex-shrink * width
+// totalShrinkScaledWidth 总的收缩比例宽度，total(flex-shrink * width)
+// shrinkRatio 收缩比例
+// negativeWidth 溢出的尺寸
+// width 所设置的大小，width或flex-basis
+// realWidth 真实大小
+所以
+
+leftWidth = 300 - (2 * 300 / (2 * 300 + 1 * 200)) * 100 = 225
+rightWidth = 200 - (1 * 200 / (2 * 300 + 1 * 200)) * 100 = 175
+注意：经测试，使用min-width设置时上述计算方法失效，大小正常，不发生缩小
+*/
+    </script>
+  </body>
+</html>

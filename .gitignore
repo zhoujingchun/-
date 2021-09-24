@@ -7,8 +7,7 @@ pages/
 
 .umi/
 .umi-production/
-.umi-production
-.vscode/
+.umi-prod
 .history/
 
 /.webpackrc.js

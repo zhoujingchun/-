@@ -1,17 +1,4 @@
 
-.theme
-.mritemp/
-.mriadmin.js
-
-pages/
-
-.umi/
-.umi-production/
-.umi-prod
-.history/
-
-/.webpackrc.js
-#---------------------------------
 # Extensions
 #---------------------------------
 *.gz
@@ -30,16 +17,5 @@ pages/
 vscode
 .vscode
 
-#---------------------------------
-# OS generated
-#---------------------------------
-__MACOSX/
-.DS_Store
-Thumbs.db
-/public/output/
-/package.json
 
-# yarn cache
-.yarnrc
-tmp
-yarn_cache
+

@@ -36,15 +36,14 @@
 
       1 <= text1.length, text2.length <= 1000
       text1 和 text2 仅由小写英文字符组成。
-          a b  c  d  e
-       e
-       a  1
-       b    1
-       s      0
-       c       1
-       d          1
-       e              1
-
+            a b c d e   i
+          0 0 0 0 0 0
+       a  0 1 1 1 1 1 
+       c  0 1 1 2 2 2  
+       e  0 1 1 2 2 3    
+          
+      
+      j
       来源：力扣（LeetCode）
       链接：https://leetcode-cn.com/problems/longest-common-subsequence
       著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。*/
@@ -67,14 +66,16 @@
           }
         }
 
+        console.log(dp)
         return dp[text1.length][text2.length];
       };
 
       //  11203
       // "ezupkr"    1002020
       //              0000000
-      const text1 = "ubmrapg";
-      const text2 = "ezpukr";
+      
+      const text1 = "ace";
+      const text2 = "abcde";
       console.log(longestCommonSubsequence(text1, text2));
     </script>
   </body>

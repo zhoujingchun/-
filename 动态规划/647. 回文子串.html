@@ -24,9 +24,8 @@
 解释：6个回文子串: "a", "a", "a", "aa", "aa", "aaa"
     */
 
-
-    //动态规划 dp[i][j]
-    /* 
+      //动态规划 dp[i][j]
+      /* 
      分三种情况   
          1: i===j
          2: i j 相差一个
@@ -41,38 +40,40 @@
 
     
     */
+   //  状态转移方程
 
-    var countSubstrings = function(s) {
-      const dp = new Array(s.length).fill(Array(s.length).fill(false))
-      let dp2 = Array.from(Array(s.length ), () =>
-          Array(s.length).fill(0)
-        );
-      let conut = 0
-      for(let i =0; i<s.length;i++){
-          for(let j =0 ; j<=i; j ++){
-              if(s[i]===s[j]){
-               
-                  if(i-j<=1){
-                    
-                   
-                  dp2[i][j] = true
-                  debugger
-                 
-                    conut++
-                  }else if(dp[i-1][j+1]){
-                    dp2[i][j] = true
-                    conut++
-                  }
+/*    if (s[i] === s[j]) {
+              if (i - j <= 1) {
+                dp[i][j] = true;
+                conut++;
+              } else if (dp[i - 1][j + 1]) {
+                dp[i][j] = true;
+                conut++;
               }
+            } */
+
+      var countSubstrings = function (s) {
+        const dp = Array.from(Array(s.length), () => Array(s.length).fill(0));
+
+        let conut = 0;
+        for (let i = 0; i < s.length; i++) {
+          for (let j = 0; j <= i; j++) {
+            if (s[i] === s[j]) {
+              if (i - j <= 1) {
+                dp[i][j] = true;
+                conut++;
+              } else if (dp[i - 1][j + 1]) {
+                dp[i][j] = true;
+                conut++;
+              }
+            }
           }
-      }
+        }
 
-      console.log(dp)
-   };
+       return conut
+      };
 
-   countSubstrings("acffc")
-
-
+      countSubstrings("acffc");
     </script>
   </body>
 </html>

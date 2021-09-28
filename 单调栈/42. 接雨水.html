@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // https://leetcode-cn.com/problems/trapping-rain-water/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-w-8/
+      const height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+  
+    // 时间复杂度：如果最大的数是 m，个数是 n，那么就是 O(m*n)O(m∗n)。空间复杂度：O(1)O(1)。
+
+
+    var trap = function (height) {
+        const maxHeight = Math.max(...height);
+        let ans = 0;
+        for (let i = 1; i <= maxHeight; i++) {
+          let start = false;
+          let tem = 0;
+
+          for (let j = 0; j < height.length; j++) {
+            if (height[j] >= i) {
+              start = true;
+              ans = ans + tem;
+              tem = 0;
+            
+              continue;
+            }
+            if (start && height[j] < i) {
+              tem++;
+            }
+          }
+        }
+        return ans;
+      };
+      console.log(trap(height));
+    </script>
+  </body>
+</html>

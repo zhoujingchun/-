@@ -1,78 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <title>Title</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <script>
-      /*
-    647. 回文子串
-   给你一个字符串 s ，请你统计并返回这个字符串中 回文子串 的数目。
+        /*
+          647. 回文子串
+         给你一个字符串 s ，请你统计并返回这个字符串中 回文子串 的数目。
+      
+         回文字符串 是正着读和倒过来读一样的字符串。
+      
+        子字符串 是字符串中的由连续字符组成的一个序列。
+      
+         具 有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被视作不同的子串。
+      
+        示例 1：输入：s = "abc"   输出：3
+         解释：三个回文子串: "a", "b", "c"
+          示例 2：
+      输入：s = "aaa"
+      输出：6
+      解释：6个回文子串: "a", "a", "a", "aa", "aa", "aaa"
+          */
 
-   回文字符串 是正着读和倒过来读一样的字符串。
+        //动态规划 dp[i][j]
+        /* 
+           分三种情况   
+               1: i===j
+               2: i j 相差一个
+               3: i j 大于 1
+      
+               a c  b f  c 
+             a 1
+             c   1      1              
+             f      1 1
+             f        1
+             c          1
+      
+          
+          */
 
-  子字符串 是字符串中的由连续字符组成的一个序列。
+        var countSubstrings = function (s) {
+            let dp = Array.from(Array(s.length), () => Array(s.length).fill(0));
+            let conut = 0;
+            for (let i = 0; i < s.length; i++) {
+                for (let j = 0; j <= i; j++) {
+                    if (s[i] === s[j]) {
+                        if (i - j <= 1) {
+                            dp[i][j] = true;
 
-   具 有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被视作不同的子串。
+                            conut++;
+                        } else if (dp[i - 1][j + 1]) {
+                            dp[i][j] = true;
+                            conut++;
+                        }
+                        console.log(i,j)
+                    }
+                }
+            }
 
-  示例 1：输入：s = "abc"   输出：3
-   解释：三个回文子串: "a", "b", "c"
-    示例 2：
-输入：s = "aaa"
-输出：6
-解释：6个回文子串: "a", "a", "a", "aa", "aa", "aaa"
-    */
+            console.log(dp);
+            return conut
+        };
 
+        // 中心扩散
 
-    //动态规划 dp[i][j]
-    /* 
-     分三种情况   
-         1: i===j
-         2: i j 相差一个
-         3: i j 大于 1
+        const countSubstrings2 = (s) => {
+            let ans = 0;
 
-         a c  b f  c 
-       a 1
-       c   1      1              
-       f      1 1
-       f        1
-       c          1
+            for (let i = 0; i < 2 * s.length - 1; i++) {
+                let left = i / 2,
+                right = i / 2 + (i % 2);
+                while (left >= 0 && right < s.length && s.charAt(left) === s.charAt(right)) {
+                    --left;
+                    ++right;
+                    ++ans;
+                }
+            }
+            return ans;
+        };
 
-    
-    */
-
-    var countSubstrings = function(s) {
-      const dp = new Array(s.length).fill(Array(s.length).fill(false))
-      let dp2 = Array.from(Array(s.length ), () =>
-          Array(s.length).fill(0)
-        );
-      let conut = 0
-      for(let i =0; i<s.length;i++){
-          for(let j =0 ; j<=i; j ++){
-              if(s[i]===s[j]){
-               
-                  if(i-j<=1){
-                    
-                   
-                  dp2[i][j] = true
-                  debugger
-                 
-                    conut++
-                  }else if(dp[i-1][j+1]){
-                    dp2[i][j] = true
-                    conut++
-                  }
-              }
-          }
-      }
-
-      console.log(dp)
-   };
-
-   countSubstrings("acffc")
-
-
+        console.log(countSubstrings2("acffc"));
+        console.log(countSubstrings("acffc"));
     </script>
-  </body>
+</body>
+
 </html>

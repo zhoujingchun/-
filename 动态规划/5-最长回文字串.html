@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        var countSubstrings = function (s) {
+            let dp = Array.from(Array(s.length), () => Array(s.length).fill(0));
+
+            let tem = "";
+            for (let i = 0; i < s.length; i++) {
+                for (let j = 0; j <= i; j++) {
+                    const str = s.substring(j, i + 1);
+                    if (s[i] === s[j]) {
+                        if (i - j <= 1) {
+                            dp[i][j] = true;
+                            if (str.length > tem.length) {
+                                tem = str;
+                            }
+                        } else if (dp[i - 1][j + 1]) {
+                            dp[i][j] = true;
+                            if (str.length > tem.length) {
+                                tem = str;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return tem;
+        };
+
+        // 中心扩散
+
+        const countSubstrings2 = (s) => {
+            let ans = 0;
+
+            for (let i = 0; i < 2 * s.length - 1; i++) {
+                let left = i / 2,
+                    right = i / 2 + (i % 2);
+                while (
+                    left >= 0 &&
+                    right < s.length &&
+                    s.charAt(left) === s.charAt(right)
+                ) {
+                    --left;
+                    ++right;
+                    ++ans;
+                }
+            }
+            return ans;
+        };
+
+        console.log(countSubstrings("aacabdkacaa"));
+    </script>
+</body>
+
+</html>

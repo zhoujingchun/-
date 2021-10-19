@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <script>
+      /*
+          * 请根据每日 气温 列表 temperatures ，请计算在每一天需要等几天才会有更高的温度。如果气温在这之后都不会升高，请在该位置用 0 来代替。
+
+      示例 1:
+                           0   1  2   3  4  5   6  7
+      输入: temperatures = [73,74,75,71,69,72,76,73]
+      输出: [1,1,4,2,1,1,0,0]   //
+      示例 2:
+
+      输入: temperatures = [30,40,50,60]
+      输出: [1,1,1,0]
+      示例 3:
+
+      输入: temperatures = [30,60,90]
+      输出: [1,1,0]
+
+      来源：力扣（LeetCode）
+      链接：https://leetcode-cn.com/problems/daily-temperatures
+      著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+          * */
+
+      // 2 3  5
+
+      var dailyTemperatures = function (arr) {
+        let result = new Array(arr.length).fill(0);
+        let stack = [0];
+
+        for (let i = 1; i < arr.length; i++) {
+          if (arr[i] < arr[stack[stack.length - 1]]) {
+            stack.push(i);
+          } else {
+            let increase = 1;
+            while (stack.length && arr[i] > arr[stack[stack.length - 1]]) {
+              let j = stack.pop();
+
+              result[j] = i - j;
+            }
+            stack.push(i);
+          }
+        }
+        return result;
+      };
+      const arr1 = [73, 74, 75, 71, 69, 72, 76, 73];
+      const arr2 = [30, 40, 50, 60];
+      console.log(dailyTemperatures(arr2));
+    </script>
+  </body>
+</html>

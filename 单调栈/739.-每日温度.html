@@ -37,7 +37,6 @@
           if (arr[i] < arr[stack[stack.length - 1]]) {
             stack.push(i);
           } else {
-            let increase = 1;
             while (stack.length && arr[i] > arr[stack[stack.length - 1]]) {
               let j = stack.pop();
 
